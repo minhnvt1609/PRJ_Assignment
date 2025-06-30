@@ -8,6 +8,10 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>controller.authentication.LoginController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Create</servlet-name>
+        <servlet-class>controller.rfl.Create</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -15,5 +19,9 @@
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Create</servlet-name>
+        <url-pattern>/rfl/create</url-pattern>
     </servlet-mapping>
 </web-app>
