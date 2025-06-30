@@ -10,7 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
+import java.util.ArrayList;
 import model.Account;
 import model.RequestForLeave;
 
@@ -18,24 +18,23 @@ import model.RequestForLeave;
  *
  * @author TuanBro
  */
-public class Create extends BaseRBACController {
+public class List extends BaseRBACController {
+
+    protected void processRequest(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
+        RequestForLeaveDBContext db = new RequestForLeaveDBContext();
+        ArrayList<RequestForLeave> rfls = db.list(account.getId());
+        req.setAttribute("rfls", rfls);
+        req.getRequestDispatcher("../view/request/list.jsp").forward(req, resp);
+    }
 
     @Override
     protected void processPost(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
-        RequestForLeave rfl = new RequestForLeave();
-        rfl.setTitle(req.getParameter("title"));
-        rfl.setReason(req.getParameter("reason"));
-        rfl.setFrom(Date.valueOf(req.getParameter("from")));
-        rfl.setTo(Date.valueOf(req.getParameter("to")));
-        rfl.setCreatedby(account);
-
-        RequestForLeaveDBContext db = new RequestForLeaveDBContext();
-        db.insert(rfl);
-        resp.sendRedirect("../view/request/success.jsp");
+        processRequest(req, resp, account);
     }
 
     @Override
     protected void processGet(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
-        req.getRequestDispatcher("../view/request/create.jsp").forward(req, resp);
+        processRequest(req, resp, account);
     }
+
 }

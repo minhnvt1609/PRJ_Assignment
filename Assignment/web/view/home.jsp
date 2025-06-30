@@ -24,8 +24,8 @@
         <h3>Welcome, <%= acc.getDisplayname() %>!</h3>
         <p>Select:</p>
         <ul>
-            <li><a href="request/create">Create request</a></li>
-            <li><a href="request/list">List request</a></li>
+            <li><a href="rfl/create">Create request</a></li>
+            <li><a href="rfl/list">List request</a></li>
             <li><a href="agenda">List agenda</a></li>
             <li><a href="logout">Logout</a></li>
         </ul>

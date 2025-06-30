@@ -22,7 +22,7 @@ public class RoleDBContext extends DBContext<Role> {
     public ArrayList<Role> getByAccount(int aid) {
         ArrayList<Role> roles = new ArrayList<>();
         try {
-            String sql = "SELECT r.rid,r.rname,f.fid,f.description,f.entrypoin FROM \n"
+            String sql = "SELECT r.rid,r.rname,f.fid,f.description,f.entrypoint FROM \n"
                     + "	Account a LEFT JOIN Account_Role ar ON a.aid = ar.aid\n"
                     + "			  LEFT JOIN [Role] r ON r.rid = ar.rid\n"
                     + "			  LEFT JOIN Role_Feature rf ON rf.rid = r.rid\n"
@@ -50,7 +50,7 @@ public class RoleDBContext extends DBContext<Role> {
                     Feature f = new Feature();
                     f.setId(fid);
                     f.setDescription(rs.getString("description"));
-                    f.setEntrypoint(rs.getString("entrypoin"));
+                    f.setEntrypoint(rs.getString("entrypoint"));
                     temp.getFeatures().add(f);
                 }
             }
