@@ -53,7 +53,5 @@
                 </tr>
             </c:forEach>
         </table>
-        <br>
-        <a href="../../home">⬅ Return Home</a>
     </body>
 </html>
