@@ -33,7 +33,7 @@
                     <td>${r.reason}</td>
                     <td>${r.from}</td>
                     <td>${r.to}</td>
-                    <td>${r.status eq 0?"PROCESSING":r.status eq 1?"Approved":"Rejected"}</td>
+                    <td>${r.status eq 0?"Processing":r.status eq 1?"Approved":"Rejected"}</td>
                     <td>${r.createdby.username}</td>
                     <td>${r.processby.username}</td>
                     <td>${r.note} </td>
