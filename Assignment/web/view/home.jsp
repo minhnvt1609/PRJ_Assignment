@@ -25,7 +25,8 @@
         <p>Select:</p>
         <ul>
             <li><a href="rfl/create">Create request</a></li>
-            <li><a href="rfl/list">List request</a></li>
+            <li><a href="rfl/own">View your requests</a></li>
+            <li><a href="rfl/list">List requests</a></li>
             <li><a href="agenda">List agenda</a></li>
             <li><a href="logout">Logout</a></li>
         </ul>

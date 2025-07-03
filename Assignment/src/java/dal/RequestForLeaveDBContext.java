@@ -19,6 +19,50 @@ import model.RequestForLeave;
  */
 public class RequestForLeaveDBContext extends DBContext<RequestForLeave> {
 
+    public ArrayList<RequestForLeave> listByCreator(int aid) {
+        ArrayList<RequestForLeave> rfls = new ArrayList<>();
+        try {
+            String sql = "SELECT r.rid, r.title, r.reason, r.[from], r.[to], r.status, "
+                    + "r.note, r.createdby, c.username as createduser, "
+                    + "r.processedby, p.username as processeduser "
+                    + "FROM RequestForLeave r "
+                    + "JOIN Account c ON r.createdby = c.aid "
+                    + "LEFT JOIN Account p ON r.processedby = p.aid "
+                    + "WHERE r.createdby = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, aid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                RequestForLeave r = new RequestForLeave();
+                r.setId(rs.getInt("rid"));
+                r.setTitle(rs.getString("title"));
+                r.setReason(rs.getString("reason"));
+                r.setFrom(rs.getDate("from"));
+                r.setTo(rs.getDate("to"));
+                r.setStatus(rs.getInt("status"));
+                r.setNote(rs.getString("note"));
+
+                Account createdby = new Account();
+                createdby.setId(rs.getInt("createdby"));
+                createdby.setUsername(rs.getString("createduser"));
+                r.setCreatedby(createdby);
+
+                int processedbyId = rs.getInt("processedby");
+                if (!rs.wasNull()) {
+                    Account processedby = new Account();
+                    processedby.setId(processedbyId);
+                    processedby.setUsername(rs.getString("processeduser"));
+                    r.setProcessby(processedby);
+                }
+
+                rfls.add(r);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestForLeaveDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rfls;
+    }
+
     public void updateStatusWithNote(int rid, int status, int processedby, String note) {
         try {
             String sql = "UPDATE RequestForLeave SET status = ?, processedby = ?, note = ? WHERE rid = ?";

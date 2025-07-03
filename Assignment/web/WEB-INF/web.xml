@@ -20,6 +20,10 @@
         <servlet-name>Process</servlet-name>
         <servlet-class>controller.rfl.Process</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Own</servlet-name>
+        <servlet-class>controller.rfl.MyRequests</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -39,5 +43,9 @@
     <servlet-mapping>
         <servlet-name>Process</servlet-name>
         <url-pattern>/rfl/process</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Own</servlet-name>
+        <url-pattern>/rfl/own</url-pattern>
     </servlet-mapping>
 </web-app>
