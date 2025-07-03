@@ -12,6 +12,6 @@
 </head>
 <body>
     <h3>Success</h3>
-    <a href="../../home">Return home.</a>
+    <a href="../view/home.jsp">Return home.</a>
 </body>
 </html>

@@ -28,7 +28,7 @@
             </tr>
             <c:forEach items="${requestScope.rfls}" var="r">
                 <tr>
-                    <td>${r.rid}</td>
+                    <td>${r.id}</td>
                     <td>${r.title}</td>
                     <td>${r.reason}</td>
                     <td>${r.from}</td>
@@ -38,11 +38,22 @@
                     <td>${r.processby.username}</td>
                     <td>${r.note} </td>
                     <td>
-                        <a href="process?id=${r.rid}&decision=1">Approve</a>
-                        <a href="process?id=${r.rid}&decision=0">Reject</a>
+                        <form action="process" method="get" style="display:inline;">
+                            <input type="hidden" name="id" value="${r.id}" />
+                            <input type="hidden" name="decision" value="1" />
+                            <button type="submit">Approve</button>
+                        </form>
+
+                        <form action="process" method="get" style="display:inline;">
+                            <input type="hidden" name="id" value="${r.id}" />
+                            <input type="hidden" name="decision" value="0" />
+                            <button type="submit">Reject</button>
+                        </form>
                     </td>
                 </tr>
             </c:forEach>
         </table>
+        <br>
+        <a href="../../home">⬅ Return Home</a>
     </body>
 </html>

@@ -19,6 +19,28 @@ import model.RequestForLeave;
  */
 public class RequestForLeaveDBContext extends DBContext<RequestForLeave> {
 
+    public void updateStatusWithNote(int rid, int status, int processedby, String note) {
+        try {
+            String sql = "UPDATE RequestForLeave SET status = ?, processedby = ?, note = ? WHERE rid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, status);
+            stm.setInt(2, processedby);
+            stm.setString(3, note);
+            stm.setInt(4, rid);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestForLeaveDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (!connection.isClosed()) {
+                    connection.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(RequestForLeaveDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
     @Override
     public void insert(RequestForLeave model) {
         try {
@@ -77,12 +99,12 @@ public class RequestForLeaveDBContext extends DBContext<RequestForLeave> {
                     + "    INNER JOIN EmployeeHierarchy eh ON e.managerid = eh.eid\n"
                     + ")\n"
                     + "SELECT rfl.rid,rfl.title,rfl.reason,rfl.[from], rfl.[to],rfl.[status],rfl.createdby,\n"
-                    + "c.username as createduser,rfl.prcoessedby,p.username as processeduser,rfl.note\n"
+                    + "c.username as createduser,rfl.processedby,p.username as processeduser,rfl.note\n"
                     + "FROM EmployeeHierarchy e\n"
                     + "	 INNER JOIN Account_Employee ae ON ae.eid = e.eid\n"
                     + "	 INNER JOIN Account c ON c.aid = ae.aid\n"
                     + "	 INNER JOIN RequestForLeave rfl ON rfl.createdby = c.aid\n"
-                    + "	 LEFT JOIN Account p ON p.aid = rfl.prcoessedby\n"
+                    + "	 LEFT JOIN Account p ON p.aid = rfl.processedby\n"
                     + "\n"
                     + "WHERE c.aid != ?; ";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -106,10 +128,10 @@ public class RequestForLeaveDBContext extends DBContext<RequestForLeave> {
                 createdby.setUsername(rs.getString("createduser"));
                 r.setCreatedby(createdby);
 
-                int processedbyid = rs.getInt("prcoessedby");
+                int processedbyid = rs.getInt("processedby");
                 if (processedbyid > 0) {
                     Account processedby = new Account();
-                    processedby.setId(rs.getInt("prcoessedby"));
+                    processedby.setId(rs.getInt("processedby"));
                     processedby.setUsername(rs.getString("processeduser"));
                     r.setProcessby(processedby);
                     r.setNote(rs.getString("note"));

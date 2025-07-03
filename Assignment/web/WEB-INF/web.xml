@@ -12,6 +12,14 @@
         <servlet-name>Create</servlet-name>
         <servlet-class>controller.rfl.Create</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>List</servlet-name>
+        <servlet-class>controller.rfl.List</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Process</servlet-name>
+        <servlet-class>controller.rfl.Process</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -23,5 +31,13 @@
     <servlet-mapping>
         <servlet-name>Create</servlet-name>
         <url-pattern>/rfl/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>List</servlet-name>
+        <url-pattern>/rfl/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Process</servlet-name>
+        <url-pattern>/rfl/process</url-pattern>
     </servlet-mapping>
 </web-app>
