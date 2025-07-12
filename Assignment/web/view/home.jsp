@@ -13,23 +13,16 @@
         return;
     }
 %>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Home</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-</head>
-<body>
-    <div class="container mt-5">
-        <h3>Welcome, <%= acc.getDisplayname() %>!</h3>
-        <p>Select:</p>
-        <ul>
-            <li><a href="rfl/create">Create request</a></li>
-            <li><a href="rfl/own">View your requests</a></li>
-            <li><a href="rfl/list">List requests</a></li>
-            <li><a href="agenda">List agenda</a></li>
-            <li><a href="logout">Logout</a></li>
-        </ul>
-    </div>
-</body>
-</html>
+<%@ include file="layout/header.jsp" %>
+
+<h3 class="mb-4">Welcome, <strong><%= acc.getDisplayname() %></strong>!</h3>
+
+<div class="list-group">
+    <a href="rfl/create" class="list-group-item list-group-item-action">➕ Create Request</a>
+    <a href="rfl/myrequests" class="list-group-item list-group-item-action">🗂 My Requests</a>
+    <a href="rfl/list" class="list-group-item list-group-item-action">📋 Manage Requests</a>
+    <a href="agenda" class="list-group-item list-group-item-action">🗓 Agenda</a>
+    <a href="logout" class="list-group-item list-group-item-action text-danger">🚪 Logout</a>
+</div>
+
+<%@ include file="layout/footer.jsp" %>

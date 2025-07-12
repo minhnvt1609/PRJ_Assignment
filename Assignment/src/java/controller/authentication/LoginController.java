@@ -23,15 +23,13 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        
+
         AccountDBContext db = new AccountDBContext();
         Account account = db.get(username, password);
-        if(account ==null)
-        {
-            resp.getWriter().println("Login failed!");
-        }
-        else
-        {
+        if (account == null) {
+            req.setAttribute("error", "Invalid username or password!");
+            req.getRequestDispatcher("view/authentication/login.jsp").forward(req, resp);
+        } else {
             HttpSession session = req.getSession();
             session.setAttribute("account", account);
             resp.sendRedirect("home");
