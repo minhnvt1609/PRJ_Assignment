@@ -17,37 +17,20 @@ import model.RequestForLeave;
  *
  * @author TuanBro
  */
-public class Process extends BaseRBACController {
+public class View extends BaseRBACController {
 
     @Override
     protected void processPost(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
-        try {
-            int id = Integer.parseInt(req.getParameter("id"));
-            int decision = Integer.parseInt(req.getParameter("decision")); // 1=approve, 0=reject
-            String note = req.getParameter("note");
-
-            RequestForLeaveDBContext db = new RequestForLeaveDBContext();
-            db.updateStatusWithNote(id, decision == 1 ? 1 : 2, account.getId(), note);
-
-            resp.sendRedirect("list");
-        } catch (Exception e) {
-            e.printStackTrace();
-            resp.sendError(400, "Bad request");
-        }
+        processGet(req, resp, account);
     }
 
     @Override
     protected void processGet(HttpServletRequest req, HttpServletResponse resp, Account account) throws ServletException, IOException {
         int id = Integer.parseInt(req.getParameter("id"));
-        int decision = Integer.parseInt(req.getParameter("decision"));
-
         RequestForLeaveDBContext db = new RequestForLeaveDBContext();
         RequestForLeave rfl = db.get(id);
-
         req.setAttribute("rfl", rfl);
-        req.setAttribute("decision", decision); // cũng cần để đổi nút
-
-        req.getRequestDispatcher("/view/request/process.jsp").forward(req, resp);
+        req.getRequestDispatcher("/view/request/view.jsp").forward(req, resp);
     }
 
 }

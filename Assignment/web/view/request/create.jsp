@@ -4,27 +4,38 @@
     Author     : TuanBro
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-       <form action="create" method="POST">
-            <label for="title">Title:</label><br>
-            <input type="text" id="title" name="title" required><br><br>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ include file="../layouts/header.jsp" %>
 
-            <label for="reason">Reason:</label><br>
-            <input type="text" id="reason" name="reason" required><br><br>
+<h3>Create Leave Request</h3>
 
-            <label for="from">From:</label><br>
-            <input type="date" id="from" name="from" required><br><br>
+<form action="create" method="post">
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input type="text" name="title" class="form-control" required>
+    </div>
 
-            <label for="to">To:</label><br>
-            <input type="date" id="to" name="to" required><br><br>
+    <div class="mb-3">
+        <label class="form-label">Reason</label>
+        <textarea name="reason" class="form-control" rows="3" required></textarea>
+    </div>
 
-            <button type="submit">Submit</button>
-    </body>
-</html>
+    <div class="row">
+        <div class="col">
+            <label class="form-label">From</label>
+            <input type="date" name="from" class="form-control" required>
+        </div>
+        <div class="col">
+            <label class="form-label">To</label>
+            <input type="date" name="to" class="form-control" required>
+        </div>
+    </div>
+
+    <br>
+    <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="../home" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+<%@ include file="../layouts/footer.jsp" %>

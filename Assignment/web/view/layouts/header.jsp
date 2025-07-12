@@ -21,7 +21,7 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <c:if test="${not empty sessionScope.account}">
                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/rfl/create">Create Request</a></li>
-                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/rfl/myrequests">My Requests</a></li>
+                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/rfl/own">My Requests</a></li>
                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/rfl/list">Manage Requests</a></li>
                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/agenda">Agenda</a></li>
                     <li class="nav-item"><a class="nav-link text-danger" href="${pageContext.request.contextPath}/logout">Logout</a></li>

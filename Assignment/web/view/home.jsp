@@ -19,7 +19,7 @@
 
 <div class="list-group">
     <a href="rfl/create" class="list-group-item list-group-item-action">➕ Create Request</a>
-    <a href="rfl/myrequests" class="list-group-item list-group-item-action">🗂 My Requests</a>
+    <a href="rfl/own" class="list-group-item list-group-item-action">🗂 My Requests</a>
     <a href="rfl/list" class="list-group-item list-group-item-action">📋 Manage Requests</a>
     <a href="agenda" class="list-group-item list-group-item-action">🗓 Agenda</a>
     <a href="logout" class="list-group-item list-group-item-action text-danger">🚪 Logout</a>

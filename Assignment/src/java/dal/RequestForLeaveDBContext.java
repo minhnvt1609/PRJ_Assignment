@@ -203,7 +203,53 @@ public class RequestForLeaveDBContext extends DBContext<RequestForLeave> {
 
     @Override
     public RequestForLeave get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        RequestForLeave r = null;
+        try {
+            String sql = "SELECT r.rid, r.title, r.reason, r.[from], r.[to], r.status, r.note, "
+                    + "r.createdby, c.username as createduser, "
+                    + "r.processedby, p.username as processeduser "
+                    + "FROM RequestForLeave r "
+                    + "INNER JOIN Account c ON r.createdby = c.aid "
+                    + "LEFT JOIN Account p ON r.processedby = p.aid "
+                    + "WHERE r.rid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                r = new RequestForLeave();
+                r.setId(rs.getInt("rid"));
+                r.setTitle(rs.getString("title"));
+                r.setReason(rs.getString("reason"));
+                r.setFrom(rs.getDate("from"));
+                r.setTo(rs.getDate("to"));
+                r.setStatus(rs.getInt("status"));
+                r.setNote(rs.getString("note"));
+
+                Account created = new Account();
+                created.setId(rs.getInt("createdby"));
+                created.setUsername(rs.getString("createduser"));
+                r.setCreatedby(created);
+
+                int processedId = rs.getInt("processedby");
+                if (!rs.wasNull()) {
+                    Account processed = new Account();
+                    processed.setId(processedId);
+                    processed.setUsername(rs.getString("processeduser"));
+                    r.setProcessby(processed);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RequestForLeaveDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (!connection.isClosed()) {
+                    connection.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(RequestForLeaveDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return r;
     }
 
     @Override
