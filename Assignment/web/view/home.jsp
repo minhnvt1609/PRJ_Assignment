@@ -13,7 +13,7 @@
         return;
     }
 %>
-<%@ include file="layout/header.jsp" %>
+<%@ include file="layouts/header.jsp" %>
 
 <h3 class="mb-4">Welcome, <strong><%= acc.getDisplayname() %></strong>!</h3>
 
@@ -25,4 +25,4 @@
     <a href="logout" class="list-group-item list-group-item-action text-danger">🚪 Logout</a>
 </div>
 
-<%@ include file="layout/footer.jsp" %>
+<%@ include file="layouts/footer.jsp" %>
