@@ -5,13 +5,15 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Create request successfully!!</title>
-</head>
-<body>
-    <h3>Success</h3>
-    <a href="../view/home.jsp">Return home.</a>
-</body>
-</html>
+<%@ include file="../layouts/header.jsp" %>
+
+<div class="container mt-5 text-center">
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Request Created Successfully!</h4>
+        <p>Your leave request has been submitted successfully.</p>
+        <hr>
+        <a href="${pageContext.request.contextPath}/home" class="btn btn-primary">Return to Home</a>
+    </div>
+</div>
+
+<%@ include file="../layouts/footer.jsp" %>
