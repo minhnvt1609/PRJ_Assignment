@@ -19,7 +19,7 @@
 <table border="1" class="table table-bordered">
     <thead>
         <tr>
-            <th>Nhân sự</th>
+            <th>Employee</th>
             <%
                 LocalDate fromDate = (LocalDate) request.getAttribute("from");
                 LocalDate toDate = (LocalDate) request.getAttribute("to");

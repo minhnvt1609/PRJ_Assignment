@@ -23,7 +23,7 @@
                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/rfl/create">Create Request</a></li>
                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/rfl/own">My Requests</a></li>
                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/rfl/list">Manage Requests</a></li>
-                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/agenda">Agenda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/rfl/agenda">Agenda</a></li>
                     <li class="nav-item"><a class="nav-link text-danger" href="${pageContext.request.contextPath}/logout">Logout</a></li>
                 </c:if>
             </ul>
