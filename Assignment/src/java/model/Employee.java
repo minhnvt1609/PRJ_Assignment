@@ -12,11 +12,20 @@ import java.util.ArrayList;
  */
 public class Employee {
 
+    private int eid;
     private String name;
     private Account account;
     private Employee manager;
     private ArrayList<Employee> employees = new ArrayList<>();
     private ArrayList<RequestForLeave> requests = new ArrayList<>();
+
+    public int getEid() {
+        return eid;
+    }
+
+    public void setEid(int eid) {
+        this.eid = eid;
+    }
 
     public String getName() {
         return name;

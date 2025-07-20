@@ -7,10 +7,14 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.sql.Date;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
+import model.Employee;
 import model.RequestForLeave;
 
 /**
@@ -262,4 +266,55 @@ public class RequestForLeaveDBContext extends DBContext<RequestForLeave> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    public ArrayList<Employee> getAllEmployees() {
+        ArrayList<Employee> list = new ArrayList<>();
+        try {
+            String sql = "SELECT eid, ename FROM Employee";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Employee e = new Employee();
+                e.setEid(rs.getInt("eid"));
+                e.setName(rs.getString("ename"));
+                list.add(e);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public HashMap<Integer, ArrayList<LocalDate>> getLeaveDatesInRange(LocalDate from, LocalDate to) {
+        HashMap<Integer, ArrayList<LocalDate>> map = new HashMap<>();
+        try {
+            String sql = "SELECT e.eid, r.[from], r.[to] "
+                    + "FROM RequestForLeave r "
+                    + "JOIN Account a ON r.createdby = a.aid "
+                    + "JOIN Account_Employee ae ON ae.aid = a.aid "
+                    + "JOIN Employee e ON e.eid = ae.eid "
+                    + "WHERE r.status = 1 AND "
+                    + "r.[to] >= ? AND r.[from] <= ?";  // chồng lấn thời gian
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setDate(1, Date.valueOf(from));
+            stm.setDate(2, Date.valueOf(to));
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                int eid = rs.getInt("eid");
+                LocalDate start = rs.getDate("from").toLocalDate();
+                LocalDate end = rs.getDate("to").toLocalDate();
+                ArrayList<LocalDate> dates = map.getOrDefault(eid, new ArrayList<>());
+
+                LocalDate d = start;
+                while (!d.isAfter(end)) {
+                    dates.add(d);
+                    d = d.plusDays(1);
+                }
+                map.put(eid, dates);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
 }

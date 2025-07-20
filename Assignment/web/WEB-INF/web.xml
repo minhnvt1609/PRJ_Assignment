@@ -32,6 +32,10 @@
         <servlet-name>View</servlet-name>
         <servlet-class>controller.rfl.View</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Agenda</servlet-name>
+        <servlet-class>controller.rfl.Agenda</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -63,5 +67,9 @@
     <servlet-mapping>
         <servlet-name>View</servlet-name>
         <url-pattern>/rfl/view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Agenda</servlet-name>
+        <url-pattern>/rfl/agenda</url-pattern>
     </servlet-mapping>
 </web-app>
