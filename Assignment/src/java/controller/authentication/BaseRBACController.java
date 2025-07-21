@@ -47,7 +47,7 @@ public abstract class BaseRBACController extends BaseRequiredAuthenticationContr
         if (isGrantedAccessControl(req, account)) {
             processPost(req, resp, account);
         } else {
-            resp.sendError(403, "You do not have permission to access this feature");
+            req.getRequestDispatcher("../view/authentication/unauthorized.jsp").forward(req, resp);
         }
     }
 
@@ -56,7 +56,7 @@ public abstract class BaseRBACController extends BaseRequiredAuthenticationContr
         if (isGrantedAccessControl(req, account)) {
             processGet(req, resp, account);
         } else {
-            resp.sendError(403, "You do not have permission to access this feature");
+            req.getRequestDispatcher("../view/authentication/unauthorized.jsp").forward(req, resp);
         }
     }
 }
